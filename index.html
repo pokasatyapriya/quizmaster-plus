@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QuizMaster — Trivia Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div class="title">
+        <h1>QuizMaster</h1>
+        <p class="tag">Test your knowledge — powered by Open Trivia DB</p>
+      </div>
+
+      <div class="controls">
+        <label>
+          Category
+          <select id="categorySelect">
+            <option value="any">Any</option>
+          </select>
+        </label>
+
+        <label>
+          Difficulty
+          <select id="difficultySelect">
+            <option value="any">Any</option>
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </label>
+
+        <label>
+          Type
+          <select id="typeSelect">
+            <option value="any">Any</option>
+            <option value="multiple" selected>Multiple Choice</option>
+            <option value="boolean">True / False</option>
+          </select>
+        </label>
+
+        <label>
+          Questions
+          <input id="amountInput" type="number" min="1" max="50" value="10" />
+        </label>
+
+        <button id="startBtn" class="btn">Start Quiz</button>
+      </div>
+    </header>
+
+    <section class="game">
+      <div class="left">
+        <div id="setupCard" class="card">
+          <h2>Ready?</h2>
+          <p>Choose your options and press <strong>Start Quiz</strong> to begin. Questions come from the Open Trivia DB (<em>opentdb.com</em>).</p>
+          <p class="muted">If the API fails, a small offline question set will be used.</p>
+        </div>
+
+        <div id="questionCard" class="card hidden" aria-live="polite">
+          <div class="meta">
+            <div id="qProgress">Question 0 / 0</div>
+            <div id="qTimer">Time: <span id="timer">--</span>s</div>
+          </div>
+
+          <div id="qText" class="question">Question text</div>
+
+          <div id="answers" class="answers" role="list"></div>
+
+          <div class="actions">
+            <button id="nextBtn" class="btn" disabled>Next</button>
+            <button id="quitBtn" class="btn ghost">Quit</button>
+          </div>
+        </div>
+
+        <div id="resultCard" class="card hidden">
+          <h2>Quiz Results</h2>
+          <p id="scoreText">You scored X / Y</p>
+          <div class="result-controls">
+            <button id="retryBtn" class="btn">Play Again</button>
+            <button id="reviewBtn" class="btn ghost">Review Answers</button>
+          </div>
+
+          <div id="highscoreWrap" class="highscore">
+            <p><strong>High Score (local):</strong> <span id="highscore">—</span></p>
+          </div>
+        </div>
+
+        <div id="reviewCard" class="card hidden">
+          <h2>Review</h2>
+          <div id="reviewList"></div>
+          <div class="actions">
+            <button id="backToResults" class="btn">Back</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="right">
+        <div class="card stats">
+          <h3>Session</h3>
+          <p>Score: <strong id="liveScore">0</strong></p>
+          <p>Correct: <strong id="correctCount">0</strong></p>
+          <p>Incorrect: <strong id="incorrectCount">0</strong></p>
+        </div>
+
+        <div class="card instructions">
+          <h3>How it works</h3>
+          <ol>
+            <li>Select category/difficulty/type and number of questions.</li>
+            <li>Each question has a per-question timer (default 20s).</li>
+            <li>Correct answers give +10 points; speed bonus applies.</li>
+          </ol>
+        </div>
+
+        <div class="card about">
+          <h3>Notes</h3>
+          <p class="muted">This demo fetches from <a href="https://opentdb.com" target="_blank" rel="noopener">Open Trivia DB</a>. No keys required.</p>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="footer">
+      <p>Made for GitHub Pages • Questions from Open Trivia DB • Offline fallback included</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
